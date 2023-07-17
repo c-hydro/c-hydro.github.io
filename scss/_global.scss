@@ -1,0 +1,59 @@
+.navbar{
+    .navbar-brand{
+        img{
+            max-height: 50px ;
+        }
+    }
+
+    .nav-item{
+        a{
+            font-weight: 700 ;
+            color: $white ;
+        }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus{
+        background-color: $cimaBlue ;
+        }        
+    }
+
+    .sm-active{
+        margin: 0 ;
+
+        &::after {
+            display:block ;
+            content: '' ;
+            border-bottom: solid 2px rgba(255, 255, 255, 1) ;  
+            margin-left: 20% ;
+            margin-right: 20% ;
+        }     
+    }
+
+    .sm-hover{
+        margin: 0 ;
+ 
+        &::after {
+            display:block ;
+            content: '' ;
+            border-bottom: solid 2px rgba(255, 255, 255, 1) ;  
+            transform: scaleX(0);  
+            transition: transform 250ms ease-in-out;
+            margin-left: 20% ;
+            margin-right: 20% ;
+        }
+
+        &:hover::after { transform: scaleX(1); }
+    }
+}
+
+main{
+    margin-top: 140px ;
+
+    .custom-text-justify{
+        text-align: justify ;  
+    }
+
+    #docs-list{
+        top: 165px !important ;
+    }
+}

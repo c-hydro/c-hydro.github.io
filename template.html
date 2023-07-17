@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+
+<html lang="it">
+    <head></head>
+    <body>
+        <input type="hidden" name="title" id="title" value="Template" />
+        <input type="hidden" name="page" id="page" value="" />
+
+        <nav class="navbar navbar-expand-lg" data-bs-theme="dark"></nav>
+        <main data-bs-spy="scroll" data-bs-target="#docs-list" data-bs-smooth-scroll="true" tabindex="0"></main>
+    
+        <!-- jQuery JS //-->
+        <script src="vendor/jquery-3.6.4.min.js"></script>
+
+        <!-- Bootstrap JS BUNDLE //-->
+        <script src="vendor/bootstrap-5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            const main = `<div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-3 mb-3" id="sm-scrollspy"></div>
+                    <div class="col-12 col-md-9">
+                        <div class="custom-text-justify sm-main">
+                            <h3 class="sm-anchor" id="list-item-1">Item 1</h3>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt repellat saepe eligendi dolor dicta error ea? 
+                                Quod maxime sint iste optio nam quia, est assumenda blanditiis, fugit ipsum ipsa reprehenderit, natus quas. 
+                                b temporibus possimus nulla. Veritatis, eaque nulla. Sed maxime quia corrupti repellendus voluptate aut placeat quam officia 
+                                mollitia assumenda veniam tempora, tenetur magni dolore doloribus quos suscipit dolor. Distinctio molestias delectus, magni 
+                                id debitis quidem consectetur. Molestiae amet nulla, quis eum labore, quas est odit adipisci rem beatae harum repudiandae tempore 
+                                odio repellat voluptatem ullam temporibus, praesentium veniam inventore debitis esse molestias quisquam impedit? Impedit 
+                                repudiandae sed error temporibus. Rerum id animi, ipsum est hic eveniet quidem quia, laudantium eum deserunt nihil molestias 
+                                dolore maiores iste. Suscipit reiciendis quos totam earum, eos dicta commodi sequi similique soluta. Illo voluptatibus 
+                                dolorem magnam incidunt asperiores libero ea ullam sit voluptatem id laboriosam placeat, optio, quidem quisquam sed nemo. 
+                                Temporibus, vel. Ipsa repellendus similique hic asperiores dolorem voluptatum ad consequatur obcaecati necessitatibus 
+                                officiis quod voluptate ab non voluptatem accusamus ipsam, in ea a illum porro veniam earum. Ipsam nihil veritatis autem i
+                                psum, repellat facere, dolor consequatur earum recusandae, deserunt tempore odio quisquam adipisci nam. Vel harum 
+                                accusantium soluta unde facere omnis aperiam saepe distinctio, suscipit doloribus similique commodi voluptatibus 
+                                enim eius minus. Nisi, nam. Numquam tempora cum fugiat pariatur cumque? Cupiditate ex, laboriosam ipsa a e
+                                um officia quos veniam temporibus fugit illo quo rerum velit placeat dolorum, voluptas dignissimos nam eius 
+                                harum eos deleniti aut. Praesentium expedita voluptatem, dolore ea dicta ipsam facilis quia pariatur eius 
+                                necessitatibus nihil a. Eligendi possimus cupiditate numquam, corporis voluptas cum error voluptatum 
+                                assumenda voluptate delectus ut adipisci reiciendis placeat ipsum blanditiis inventore non debitis illo, r
+                                atione odit repellat! Aliquam sequi debitis omnis dolore dolorum consectetur eaque necessitatibus aperiam, 
+                                esse, est, ad officiis recusandae labore ullam dolorem quod ipsum totam porro. Eveniet inventore dolores, 
+                                consectetur voluptate qui soluta molestiae quas natus rem id molestias ratione cum obcaecati harum deleniti? 
+                                Adipisci reiciendis quo, illo voluptatem nam obcaecati placeat recusandae sunt voluptas consectetur veniam, 
+                                ullam explicabo delectus labore? Fuga ullam aliquid illo velit nemo recusandae quia, consequuntur laborum. 
+                                Voluptas ad corporis vitae est qui a iste at minus rem explicabo. Ea fuga veniam quo eos nulla atque maiores, 
+                                ducimus ratione ipsum optio sint nesciunt, quasi repellat! Dolor laboriosam necessitatibus aut voluptatum hic
+                                deserunt, similique quisquam dignissimos recusandae alias eveniet cum sunt quidem quo? Iure quae rem aspernatur inventore?
+                            </p>
+                            <h5 class="sm-anchor sm-submenu" id="list-subitem-1">Sub Item 1</h5>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt repellat saepe eligendi dolor dicta error ea? 
+                                Quod maxime sint iste optio nam quia, est assumenda blanditiis, fugit ipsum ipsa reprehenderit, natus quas. 
+                                b temporibus possimus nulla. Veritatis, eaque nulla. Sed maxime quia corrupti repellendus voluptate aut placeat quam officia 
+                                mollitia assumenda veniam tempora, tenetur magni dolore doloribus quos suscipit dolor. Distinctio molestias delectus, magni 
+                                id debitis quidem consectetur. Molestiae amet nulla, quis eum labore, quas est odit adipisci rem beatae harum repudiandae tempore 
+                                odio repellat voluptatem ullam temporibus, praesentium veniam inventore debitis esse molestias quisquam impedit? Impedit 
+                                repudiandae sed error temporibus. Rerum id animi, ipsum est hic eveniet quidem quia, laudantium eum deserunt nihil molestias 
+                                dolore maiores iste. Suscipit reiciendis quos totam earum, eos dicta commodi sequi similique soluta. Illo voluptatibus 
+                                dolorem magnam incidunt asperiores libero ea ullam sit voluptatem id laboriosam placeat, optio, quidem quisquam sed nemo. 
+                                Temporibus, vel. Ipsa repellendus similique hic asperiores dolorem voluptatum ad consequatur obcaecati necessitatibus 
+                                officiis quod voluptate ab non voluptatem accusamus ipsam, in ea a illum porro veniam earum. Ipsam nihil veritatis autem i
+                                psum, repellat facere, dolor consequatur earum recusandae, deserunt tempore odio quisquam adipisci nam. Vel harum 
+                                accusantium soluta unde facere omnis aperiam saepe distinctio, suscipit doloribus similique commodi voluptatibus 
+                                enim eius minus. Nisi, nam. Numquam tempora cum fugiat pariatur cumque? Cupiditate ex, laboriosam ipsa a e
+                                um officia quos veniam temporibus fugit illo quo rerum velit placeat dolorum, voluptas dignissimos nam eius 
+                                harum eos deleniti aut. Praesentium expedita voluptatem, dolore ea dicta ipsam facilis quia pariatur eius 
+                                necessitatibus nihil a. Eligendi possimus cupiditate numquam, corporis voluptas cum error voluptatum 
+                                assumenda voluptate delectus ut adipisci reiciendis placeat ipsum blanditiis inventore non debitis illo, r
+                                atione odit repellat! Aliquam sequi debitis omnis dolore dolorum consectetur eaque necessitatibus aperiam, 
+                                esse, est, ad officiis recusandae labore ullam dolorem quod ipsum totam porro. Eveniet inventore dolores, 
+                                consectetur voluptate qui soluta molestiae quas natus rem id molestias ratione cum obcaecati harum deleniti? 
+                                Adipisci reiciendis quo, illo voluptatem nam obcaecati placeat recusandae sunt voluptas consectetur veniam, 
+                                ullam explicabo delectus labore? Fuga ullam aliquid illo velit nemo recusandae quia, consequuntur laborum. 
+                                Voluptas ad corporis vitae est qui a iste at minus rem explicabo. Ea fuga veniam quo eos nulla atque maiores, 
+                                ducimus ratione ipsum optio sint nesciunt, quasi repellat! Dolor laboriosam necessitatibus aut voluptatum hic
+                                deserunt, similique quisquam dignissimos recusandae alias eveniet cum sunt quidem quo? Iure quae rem aspernatur inventore?
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>` ;
+                 
+            $("head").load("header.html") ;
+            $("nav").load("navbar.html") ;
+            $("main").append(main) ;
+
+            const page = window.location.pathname.split("/").pop() ;
+            $("#page").val(page) ;
+
+            const smScrollspy = () =>{
+
+                let data = `` ; 
+                data += `<div id="docs-list" class="list-group border rounded-0 sticky-top">` ;
+
+                const smAnchors = document.querySelectorAll(".sm-anchor") ;
+                smAnchors.forEach((value, index) => {
+                    const href = smAnchors[index].getAttribute("id") ;
+                    const title = smAnchors[index].innerHTML ;
+
+                    if(smAnchors[index].classList.contains("sm-submenu")){
+                        data += `<a class="list-group-item list-group-item-action border-0 ps-4" href="#` + href + `">` + title + `</a>` ;
+                    }else{
+                        data += `<a class="list-group-item list-group-item-action border-0 menu" href="#` + href + `">` + title + `</a>` ;
+                    }
+                }) ;
+
+                data += `</div>` ;
+
+                $("#sm-scrollspy").append(data) ;
+            } ;
+
+            smScrollspy() ;
+
+        </script>
+
+    </body>
+</html>
