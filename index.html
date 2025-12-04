@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>C-HYDRO Repositories</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Basic styling, tweak as you like -->
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.1);
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 1rem;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 50%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(to bottom, var(--bg), var(--bg-alt));
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .brand h1 {
+      font-size: 1.2rem;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .brand span {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .header-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-left: 1rem;
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+
+    .header-links a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background-color: var(--accent-soft);
+    }
+
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    #intro {
+      margin-bottom: 1.5rem;
+    }
+
+    #intro h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.25rem;
+    }
+
+    #intro p {
+      margin: 0.25rem 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 620px;
+    }
+
+    #status {
+      margin: 0.75rem 0 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    #status .dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); opacity: 0.8; }
+      to   { transform: scale(1.4); opacity: 0.4; }
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+
+    .controls label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .controls input,
+    .controls select {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .controls input::placeholder {
+      color: #6b7280;
+    }
+
+    .controls input:focus,
+    .controls select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-soft);
+    }
+
+    #repo-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .repo-card {
+      background: radial-gradient(circle at top left,
+        rgba(56, 189, 248, 0.25),
+        transparent 55%);
+      border-radius: var(--radius-lg);
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(15, 23, 42, 0.9);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .repo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .repo-name {
+      font-weight: 600;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .repo-name a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .repo-name a:hover {
+      text-decoration: underline;
+    }
+
+    .repo-chip {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .repo-desc {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin: 0;
+    }
+
+    .repo-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border);
+    }
+
+    .badge-dot {
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .empty-state {
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--border);
+      padding: 1.2rem 1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    footer {
+      padding: 1rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <h1>C-HYDRO Open-Source Tools</h1>
+      <span>CIMA Research Foundation – Hydrology & Hydraulics</span>
+    </div>
+    <nav class="header-links">
+      <a href="https://github.com/c-hydro" target="_blank" rel="noreferrer">
+        GitHub org
+      </a>
+      <a href="/" >
+        Home
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="intro">
+    <h2>Repository catalogue</h2>
+    <p>
+      This page lists the public repositories in the
+      <strong>c-hydro</strong> GitHub organization and provides a short
+      summary of each project based on its GitHub description.
+    </p>
+    <p id="status">
+      <span class="dot"></span>
+      <span>Loading repositories from GitHub…</span>
+    </p>
+  </section>
+
+  <section class="controls">
+    <label>
+      🔍 Filter:
+      <input
+        type="search"
+        id="search"
+        placeholder="Search by name, description, or language…"
+      />
+    </label>
+
+    <label>
+      Sort:
+      <select id="sort">
+        <option value="updated">Last updated (newest first)</option>
+        <option value="name">Name (A → Z)</option>
+        <option value="name-desc">Name (Z → A)</option>
+      </select>
+    </label>
+  </section>
+
+  <section id="repos">
+    <div id="repo-list"></div>
+    <div id="empty" class="empty-state" style="display:none;">
+      No repositories match this filter.
+    </div>
+  </section>
+</main>
+
+<footer>
+  Data live from the
+  <a href="https://api.github.com/orgs/c-hydro/repos" target="_blank" rel="noreferrer">
+    GitHub API
+  </a>.
+  Rate-limited for anonymous users.
+</footer>
+
+<script>
+  const ORG = "c-hydro";
+  const API_URL = `https://api.github.com/orgs/${ORG}/repos?per_page=100&sort=updated`;
+
+  const statusEl = document.getElementById("status");
+  const repoListEl = document.getElementById("repo-list");
+  const emptyEl = document.getElementById("empty");
+  const searchInput = document.getElementById("search");
+  const sortSelect = document.getElementById("sort");
+
+  let allRepos = [];
+
+  function setStatus(text, isError = false) {
+    if (!statusEl) return;
+    const dot = statusEl.querySelector(".dot");
+    const span = statusEl.querySelector("span");
+
+    if (span) span.textContent = text || "";
+    if (dot) {
+      if (isError || !text) {
+        dot.style.display = "none";
+      } else {
+        dot.style.display = "inline-block";
+      }
+    }
+    statusEl.style.display = text ? "flex" : "none";
+  }
+
+  function summarizeDescription(desc, maxLen = 160) {
+    if (!desc || !desc.trim()) {
+      return "No description available for this repository.";
+    }
+    const clean = desc.trim();
+    if (clean.length <= maxLen) return clean;
+
+    const shortened = clean.slice(0, maxLen);
+    const lastSpace = shortened.lastIndexOf(" ");
+    const base = lastSpace > 40 ? shortened.slice(0, lastSpace) : shortened;
+    return base + "…";
+  }
+
+  function formatDate(isoString) {
+    if (!isoString) return "unknown";
+    const date = new Date(isoString);
+    if (Number.isNaN(date.getTime())) return "unknown";
+    return date.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "short",
+      day: "2-digit"
+    });
+  }
+
+  function renderRepos(repos) {
+    repoListEl.innerHTML = "";
+
+    if (!repos.length) {
+      emptyEl.style.display = "block";
+      return;
+    }
+    emptyEl.style.display = "none";
+
+    for (const repo of repos) {
+      const card = document.createElement("article");
+      card.className = "repo-card";
+
+      const header = document.createElement("div");
+      header.className = "repo-header";
+
+      const name = document.createElement("h3");
+      name.className = "repo-name";
+      const link = document.createElement("a");
+      link.href = repo.html_url;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = repo.name;
+      name.appendChild(link);
+
+      const chip = document.createElement("div");
+      chip.className = "repo-chip";
+      chip.textContent = repo.private ? "Private" : "Public";
+
+      header.appendChild(name);
+      header.appendChild(chip);
+
+      const desc = document.createElement("p");
+      desc.className = "repo-desc";
+      desc.textContent = summarizeDescription(repo.description);
+
+      const meta = document.createElement("div");
+      meta.className = "repo-meta";
+
+      if (repo.language) {
+        const lang = document.createElement("span");
+        lang.className = "badge";
+        lang.innerHTML = `<span class="badge-dot"></span>${repo.language}`;
+        meta.appendChild(lang);
+      }
+
+      if (typeof repo.stargazers_count === "number") {
+        const stars = document.createElement("span");
+        stars.className = "badge";
+        stars.textContent = `⭐ ${repo.stargazers_count} stars`;
+        meta.appendChild(stars);
+      }
+
+      const updated = document.createElement("span");
+      updated.className = "badge";
+      updated.textContent = `Last updated: ${formatDate(repo.updated_at)}`;
+      meta.appendChild(updated);
+
+      card.appendChild(header);
+      card.appendChild(desc);
+      card.appendChild(meta);
+
+      repoListEl.appendChild(card);
+    }
+  }
+
+  function applyFiltersAndSort() {
+    const term = (searchInput.value || "").toLowerCase().trim();
+    const sortMode = sortSelect.value;
+
+    let filtered = allRepos.slice();
+
+    if (term) {
+      filtered = filtered.filter(repo => {
+        const haystack = [
+          repo.name,
+          repo.description || "",
+          repo.language || ""
+        ]
+          .join(" ")
+          .toLowerCase();
+        return haystack.includes(term);
+      });
+    }
+
+    filtered.sort((a, b) => {
+      if (sortMode === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortMode === "name-desc") {
+        return b.name.localeCompare(a.name);
+      }
+      // default: updated (newest first)
+      return new Date(b.updated_at) - new Date(a.updated_at);
+    });
+
+    renderRepos(filtered);
+  }
+
+  async function loadRepos() {
+    try {
+      setStatus("Loading repositories from GitHub…");
+      const response = await fetch(API_URL);
+
+      if (!response.ok) {
+        throw new Error(`GitHub API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      // Keep only public repos, just in case
+      allRepos = (data || []).filter(r => !r.archived);
+
+      setStatus(""); // clear
+      applyFiltersAndSort();
+    } catch (err) {
+      console.error(err);
+      setStatus(
+        "Unable to load repositories from GitHub (rate limit or network error).",
+        true
+      );
+    }
+  }
+
+  searchInput.addEventListener("input", () => {
+    applyFiltersAndSort();
+  });
+
+  sortSelect.addEventListener("change", () => {
+    applyFiltersAndSort();
+  });
+
+  loadRepos();
+</script>
+</body>
+</html>
