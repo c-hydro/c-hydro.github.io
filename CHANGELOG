@@ -1,45 +1,48 @@
-=========
-Changelog
-=========
+# Changelog
 
-Version 1.0.4 [2025-11-21]
-**************************
-PACKAGE:
-	- class to manage arguments;
-	- class to manage configurations;
-	- class to manage logging;
-	- update conda installer method.
+All notable changes to the **CIMA GitHub Frontpage (c-hydro.github.io)** are documented in this file.
 
-WORKFLOWS:
-    - extend the process suite;
-	- extend the time management system;
-	- extend the workflow management system;
-	- fix bugs in selecting versions models.
+This project follows a simplified version of
+[Keep a Changelog](https://keepachangelog.com/)
+and uses semantic versioning where applicable.
 
-Version 1.0.3 [2025-11-16]
-**************************
-APPS:
-	- converter and merger for hmc model (new datasets);
-	- runner for hmc model;
-	- upgrade the time management system;
-	- upgrade the logging system, improve workflows and fix bugs in applications and methods.
+---
 
-Version 1.0.2 [2025-07-16]
-**************************
-APPS:
-	- converter and merger for hmc model;
-	- runner for hmc model
+## [2.0.0] – Current release
 
-Version 1.0.1 [2025-03-15]
-**************************
-APPS:
-	- converter and merger for s3m model;
-	- runner for s3m model
+### Added
+- New curated website structure organized by **domain areas**: Hydrology & Forecasting, Drought, and Other tools
+- Explicit **tag-based classification rule** (`#hydrology`, `#drought`, default to Other)
+- Reference workflow page describing typical model and analysis pipelines
 
-Version 1.0.0 [2024-12-02]
-**************************
-PACKAGE:
-    - beta release (first development and codes refactoring);
-    - set the package structure and main classes.
-    - set the environment management system.
+### Changed
+- Replaced dynamic GitHub API catalogue with a **static, curated card-based layout**
+- Visual redesign aligned with **CIMA Foundation identity**
 
+---
+
+## [1.5.0]
+
+### Added
+- Card-based visualization of repositories
+- Automatic listing of repositories using GitHub API (public repositories only)
+
+### Changed
+- Repositories displayed without explicit ordering or domain grouping
+
+### Limitations
+- No domain classification or tagging logic applied
+
+---
+
+## [1.0.0]
+
+### Added
+- Initial GitHub Pages frontpage
+- Minimal presentation of CIMA GitHub repositories
+
+### Notes
+- No structured content or repository descriptions
+- Served as a placeholder landing page
+
+---
