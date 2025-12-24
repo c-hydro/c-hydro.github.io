@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Workflows — C‑Hy(drology)Dro(ught)</title>
+  <meta name="description" content="C‑Hy(drology)Dro(ught) — an open-source hub for hydrology, forecasting, and drought tools maintained by CIMA Research Foundation."/>
+  <link rel="icon" href="assets/cima-logo.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <img src="assets/cima-logo.png" alt="CIMA Research Foundation logo" />
+        <div>
+          <h1>C‑Hy(drology)Dro(ught)</h1>
+          <p>Open-source hub for hydrology, forecasting, and drought tools (c-hydro)</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="hydrology.html">Hydrology & Forecasting</a>
+          <a href="drought.html">Drought</a>
+          <a href="other.html">Other</a>
+          <a href="workflows.html" aria-current="page">Workflows</a>
+          <a href="https://github.com/c-hydro">GitHub Org</a>
+          <a href="https://www.cimafoundation.org/en/">CIMA</a>
+      </nav>
+
+      <section class="hero">
+        <h2>Workflow references</h2>
+        <p>Quick, English-language references that point to the right repository for details.</p>
+      </section>
+    </div>
+  </header>
+
+  <main id="content" class="main">
+    <div class="container">
+      <section>
+  <h2 class="section-title" id="hydrology">Reference workflows</h2>
+  <p class="lead">
+    These are “how the pieces usually fit together” references. Each repository contains the authoritative, detailed instructions.
+  </p>
+
+  <div class="note">
+    <b>Classification rule:</b> repositories are grouped by declared tags/topics. Without <code>#hydrology</code> or <code>#drought</code>, a repository is listed under <b>Other tools</b>.
+  </div>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Hydrology & Forecasting workflow</h3>
+      <p>Typical operational chain around Hydrological Model Continuum (HMC) and the Flood‑PROOFS stack.</p>
+      <ol style="margin:0; padding-left: 18px; color: var(--muted); font-size: 14px;">
+        <li><b>Collect & prepare inputs</b> (observations, NWP, static layers) — often via HyDE-like data engines.</li>
+        <li><b>Run the hydrological core</b> (HMC) using wrappers such as <code>fp-hmc</code>.</li>
+        <li><b>Optional cryospheric coupling</b>: run S3M (snow/glacier) and feed outputs into hydrologic modelling.</li>
+        <li><b>Post-process</b>: quality control, aggregation, indicators, verification.</li>
+        <li><b>Publish & visualize</b>: dashboards, maps, reports, or downstream services.</li>
+      </ol>
+      <div class="actions" style="margin-top:12px;">
+        <a class="btn primary" href="hydrology.html">Hydrology repositories</a>
+        <a class="btn" href="https://github.com/c-hydro/fp-hmc">fp-hmc</a>
+      </div>
+    </article>
+
+    <article class="card" id="drought">
+      <h3>Drought analysis workflow</h3>
+      <p>Typical pipeline for drought monitoring with DRYES and companions.</p>
+      <ol style="margin:0; padding-left: 18px; color: var(--muted); font-size: 14px;">
+        <li><b>Acquire time series / rasters</b> from meteorological, satellite, or model products (often via DOOR).</li>
+        <li><b>Standardize datasets</b> and compute intermediate layers with DAM (middleware utilities).</li>
+        <li><b>Compute drought indicators</b> (indices, anomalies, persistence metrics) with DRYES.</li>
+        <li><b>Summarize & report</b> by administrative units / basins; create maps and time series.</li>
+      </ol>
+      <div class="actions" style="margin-top:12px;">
+        <a class="btn primary" href="drought.html">Drought repositories</a>
+        <a class="btn" href="https://github.com/c-hydro/dryes">DRYES</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>Near real-time flood hazard mapping</h3>
+      <p>Example workflow where model outputs are turned into hazard maps.</p>
+      <ol style="margin:0; padding-left: 18px; color: var(--muted); font-size: 14px;">
+        <li>Hydro‑meteorological forecasts feed the operational chain.</li>
+        <li>Hydrologic simulation produces discharge/runoff estimates.</li>
+        <li><b>Flomart</b> generates flood hazard maps in near real time for dissemination and decision support.</li>
+      </ol>
+      <div class="actions" style="margin-top:12px;">
+        <a class="btn primary" href="other.html">Other tools</a>
+        <a class="btn" href="https://github.com/c-hydro/flomart">Flomart</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>Reproducibility checklist</h3>
+      <p>Good practice for operational and research workflows.</p>
+      <ul style="margin:0; padding-left: 18px; color: var(--muted); font-size: 14px;">
+        <li>Pin versions (tags/releases), capture run settings and input data provenance.</li>
+        <li>Use configuration files, avoid hard-coded paths, document dependencies.</li>
+        <li>Add simple smoke tests and example runs (small domains) for CI.</li>
+      </ul>
+    </article>
+  </div>
+</section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <small>
+          Maintained by the <a href="https://github.com/c-hydro">c-hydro</a> GitHub organization — CIMA Research Foundation.
+        </small>
+        <small>
+          License info and contribution guidelines are available in each repository.
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

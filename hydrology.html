@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hydrology & Forecasting — C‑Hy(drology)Dro(ught)</title>
+  <meta name="description" content="C‑Hy(drology)Dro(ught) — an open-source hub for hydrology, forecasting, and drought tools maintained by CIMA Research Foundation."/>
+  <link rel="icon" href="assets/cima-logo.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <img src="assets/cima-logo.png" alt="CIMA Research Foundation logo" />
+        <div>
+          <h1>C‑Hy(drology)Dro(ught)</h1>
+          <p>Open-source hub for hydrology, forecasting, and drought tools (c-hydro)</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="hydrology.html" aria-current="page">Hydrology & Forecasting</a>
+          <a href="drought.html">Drought</a>
+          <a href="other.html">Other</a>
+          <a href="workflows.html">Workflows</a>
+          <a href="https://github.com/c-hydro">GitHub Org</a>
+          <a href="https://www.cimafoundation.org/en/">CIMA</a>
+      </nav>
+
+      <section class="hero">
+        <h2>Hydrology & Forecasting</h2>
+        <p>HMC, Flood‑PROOFS components, S3M cryospheric model and wrappers.</p>
+      </section>
+    </div>
+  </header>
+
+  <main id="content" class="main">
+    <div class="container">
+      <section>
+  <h2 class="section-title">Hydrology & Forecasting repositories</h2>
+  <p class="lead">
+    Models and wrappers for hydrological simulation, operational forecasting chains, and cryospheric components.
+  </p>
+
+  <div class="note">
+    <b>Tags drive classification:</b> only repositories explicitly tagged <code>#hydrology</code> or <code>#drought</code>
+    appear in their respective area pages. All repositories without those tags are listed in <a href="other.html"><b>Other tools</b></a>.
+  </div>
+
+  <label style="display:block; margin: 0 0 12px;">
+    <span style="font-weight:700;">Filter</span><br/>
+    <input data-filter type="search" placeholder="Type to filter (e.g., HMC, S3M, wrapper)..."
+      style="width:min(560px,100%); padding:10px 12px; border-radius:12px; border:1px solid var(--border);" />
+  </label>
+
+  <div class="grid">
+    
+        <article class="card" data-card data-haystack="HMC (Next Generation) Hydrological Model Continuum — Next Generation implementation. Hydrology Model core Python">
+          <h3>HMC (Next Generation)</h3>
+          <p>Hydrological Model Continuum — Next Generation implementation.</p>
+          <div class="badges"><span class="badge">#hydrology</span><span class="badge">Hydrology</span><span class="badge">Model core</span><span class="badge">Python</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/hmc">Repository</a> <a class="btn" href="https://github.com/c-hydro/hmc-dev">Legacy Fortran sources (hmc-dev)</a></div>
+        </article>
+
+        <article class="card" data-card data-haystack="Flood-PROOFS: fp-hmc Python wrapper for the Continuum (HMC) simulation component in the Flood‑PROOFS forecasting chain. Hydrology Forecasting chain Python/Fortran">
+          <h3>Flood-PROOFS: fp-hmc</h3>
+          <p>Python wrapper for the Continuum (HMC) simulation component in the Flood‑PROOFS forecasting chain.</p>
+          <div class="badges"><span class="badge">#hydrology</span><span class="badge">Hydrology</span><span class="badge">Forecasting chain</span><span class="badge">Python/Fortran</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/fp-hmc">Repository</a></div>
+        </article>
+
+        <article class="card" data-card data-haystack="S3M (model sources) Spatially explicit, hydrology‑oriented cryospheric model to reconstruct seasonal snow and glacier evolution; can be coupled with distributed hydrologic models. Cryosphere Snow & glacier Fortran">
+          <h3>S3M (model sources)</h3>
+          <p>Spatially explicit, hydrology‑oriented cryospheric model to reconstruct seasonal snow and glacier evolution; can be coupled with distributed hydrologic models.</p>
+          <div class="badges"><span class="badge">#hydrology</span><span class="badge">Cryosphere</span><span class="badge">Snow & glacier</span><span class="badge">Fortran</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/s3m-dev">Repository</a></div>
+        </article>
+
+        <article class="card" data-card data-haystack="Flood-PROOFS: fp-s3m Python wrapper package for running S3M in operational modelling systems. Cryosphere Wrapper Python">
+          <h3>Flood-PROOFS: fp-s3m</h3>
+          <p>Python wrapper package for running S3M in operational modelling systems.</p>
+          <div class="badges"><span class="badge">#hydrology</span><span class="badge">Cryosphere</span><span class="badge">Wrapper</span><span class="badge">Python</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/fp-s3m">Repository</a></div>
+        </article>
+  </div>
+
+  <div class="note">
+    Looking for “airGR”? It’s an R modelling suite maintained by the hydroGR community (outside c-hydro).
+    We keep it as a reference implementation and pedagogical example: <a href="https://hydrogr.github.io/airGR/">airGR documentation</a>.
+  </div>
+</section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <small>
+          Maintained by the <a href="https://github.com/c-hydro">c-hydro</a> GitHub organization — CIMA Research Foundation.
+        </small>
+        <small>
+          License info and contribution guidelines are available in each repository.
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>

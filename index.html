@@ -1,501 +1,126 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>CIMA – C-HYDRO Repositories</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    :root {
-      --bg: #0f172a;
-      --bg-alt: #020617;
-      --card: #020617;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56, 189, 248, 0.12);
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --border: #1f2937;
-      --radius: 12px;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    header {
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(to bottom, var(--bg), var(--bg-alt));
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .brand h1 {
-      margin: 0;
-      font-size: 1.2rem;
-      letter-spacing: 0.03em;
-    }
-
-    .brand p {
-      margin: 0.2rem 0 0;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.85rem;
-      margin-left: 0.75rem;
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      transition: all 0.15s ease;
-    }
-
-    .nav-links a:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--accent-soft);
-    }
-
-    main {
-      flex: 1;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    #intro h2 {
-      margin: 0 0 0.3rem;
-      font-size: 1.5rem;
-    }
-
-    #intro p {
-      margin: 0.15rem 0;
-      font-size: 0.95rem;
-      color: var(--muted);
-      max-width: 650px;
-    }
-
-    #status {
-      margin: 0.9rem 0 1.4rem;
-      font-size: 0.9rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    #status .dot {
-      width: 0.6rem;
-      height: 0.6rem;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes pulse {
-      from { transform: scale(1); opacity: 0.9; }
-      to { transform: scale(1.4); opacity: 0.4; }
-    }
-
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      align-items: center;
-      margin-bottom: 1.3rem;
-    }
-
-    .controls label {
-      font-size: 0.85rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .controls input,
-    .controls select {
-      background: rgba(15, 23, 42, 0.95);
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.9rem;
-      font-size: 0.85rem;
-      color: var(--text);
-      outline: none;
-    }
-
-    .controls input::placeholder {
-      color: #6b7280;
-    }
-
-    .controls input:focus,
-    .controls select:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 1px var(--accent-soft);
-    }
-
-    #repo-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-    }
-
-    .repo-card {
-      background: radial-gradient(circle at top left,
-        rgba(56,189,248,0.18),
-        transparent 55%);
-      border-radius: var(--radius);
-      padding: 0.95rem 1.05rem;
-      border: 1px solid rgba(15, 23, 42, 0.9);
-      box-shadow: 0 18px 32px rgba(0,0,0,0.45);
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
-
-    .repo-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .repo-name {
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .repo-name a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    .repo-name a:hover {
-      text-decoration: underline;
-    }
-
-    .repo-chip {
-      font-size: 0.7rem;
-      padding: 0.1rem 0.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.7);
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
-    .repo-desc {
-      margin: 0.1rem 0 0;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-
-    .repo-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.45rem;
-      margin-top: 0.2rem;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      padding: 0.12rem 0.55rem;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--border);
-    }
-
-    .badge-dot {
-      width: 0.4rem;
-      height: 0.4rem;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .empty {
-      border-radius: var(--radius);
-      border: 1px dashed var(--border);
-      padding: 1.1rem 0.9rem;
-      text-align: center;
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin-top: 1rem;
-      display: none;
-    }
-
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 1rem 1.5rem 1.4rem;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>C‑Hy(drology)Dro(ught) — c-hydro</title>
+  <meta name="description" content="C‑Hy(drology)Dro(ught) — an open-source hub for hydrology, forecasting, and drought tools maintained by CIMA Research Foundation."/>
+  <link rel="icon" href="assets/cima-logo.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
 </head>
-
 <body>
-<header>
-  <div class="header-inner">
-    <div class="brand">
-      <h1>CIMA – C-HYDRO GitHub</h1>
-      <p>Departments of Hydrology and Hydraulics, and Drought</p>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <img src="assets/cima-logo.png" alt="CIMA Research Foundation logo" />
+        <div>
+          <h1>C‑Hy(drology)Dro(ught)</h1>
+          <p>Open-source hub for hydrology, forecasting, and drought tools (c-hydro)</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="hydrology.html">Hydrology & Forecasting</a>
+          <a href="drought.html">Drought</a>
+          <a href="other.html">Other</a>
+          <a href="workflows.html">Workflows</a>
+          <a href="https://github.com/c-hydro">GitHub Org</a>
+          <a href="https://www.cimafoundation.org/en/">CIMA</a>
+      </nav>
+
+      <section class="hero">
+        <h2>C‑Hy(drology)Dro(ught)</h2>
+        <p>A curated entry point to CIMA’s open-source hydrology, forecasting, and drought repositories.</p>
+      </section>
     </div>
-    <nav class="nav-links">
-      <a href="https://github.com/c-hydro" target="_blank" rel="noreferrer">GitHub org</a>
-      <a href="https://cimafoundation.org" target="_blank" rel="noreferrer">CIMA website</a>
-    </nav>
+  </header>
+
+  <main id="content" class="main">
+    <div class="container">
+      <section>
+  <h2 class="section-title">Repository catalogue by area</h2>
+  <p class="lead">
+    Browse the c-hydro repositories grouped by operational area. Use the area pages for details and direct links to GitHub.
+  </p>
+
+  <div class="note">
+    <b>Classification rule:</b> any repository <b>without</b> the topic/tag <code>#hydrology</code> or <code>#drought</code>
+    is listed under <b>Other tools</b> by default.
   </div>
-</header>
 
-<main>
-  <section id="intro">
-    <h2>Repository catalogue</h2>
-    <p>
-      Pagina di presentazione dei repository Git di <strong>CIMA Research Foundation</strong>.
-    </p>
-    <p>
-      L’elenco è letto in tempo reale dall’organizzazione <code>c-hydro</code> su GitHub:
-      per i repository pubblici non è richiesto alcun token.
-    </p>
-    <p id="status">
-      <span class="dot"></span>
-      <span>Caricamento dei repository da GitHub…</span>
-    </p>
-  </section>
+  <div class="grid">
+    <article class="card" data-card data-haystack="hydrology forecasting hmc fp-hmc s3m">
+      <h3>Hydrology & Forecasting</h3>
+      <p>Hydrologic simulation, operational chains, and cryospheric coupling (HMC, Flood‑PROOFS wrappers, S3M).</p>
+      <div class="badges">
+        <span class="badge">HMC</span><span class="badge">Flood‑PROOFS</span><span class="badge">S3M</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="hydrology.html">Open Hydrology</a>
+        <a class="btn" href="workflows.html#hydrology">Workflows</a>
+      </div>
+    </article>
 
-  <section class="controls">
-    <label>
-      🔍 Filtro
-      <input id="search" type="search"
-             placeholder="Cerca per nome, descrizione o linguaggio…">
-    </label>
-    <label>
-      Ordina
-      <select id="sort">
-        <option value="updated">Ultimo aggiornamento (prima i più recenti)</option>
-        <option value="name">Nome (A → Z)</option>
-        <option value="name-desc">Nome (Z → A)</option>
-      </select>
-    </label>
-  </section>
+    <article class="card" data-card data-haystack="drought dryes d3tools dam">
+      <h3>Drought</h3>
+      <p>Drought analysis and monitoring toolchain (DRYES, DAM, D3Tools and related utilities).</p>
+      <div class="badges">
+        <span class="badge">DRYES</span><span class="badge">DAM</span><span class="badge">D3Tools</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="drought.html">Open Drought</a>
+        <a class="btn" href="workflows.html#drought">Workflows</a>
+      </div>
+    </article>
 
-  <section>
-    <div id="repo-list"></div>
-    <div id="empty" class="empty">
-      Nessun repository corrisponde al filtro corrente.
+    <article class="card" data-card data-haystack="utilities other head flomart ruler">
+      <h3>Other</h3>
+      <p>Supporting tools that are not strictly “hydrology” or “drought” but are useful in operations and research.</p>
+      <div class="badges">
+        <span class="badge">Head</span><span class="badge">Flomart</span><span class="badge">RULER</span>
+      </div>
+      <div class="actions">
+        <a class="btn primary" href="other.html">Open Other</a>
+      </div>
+    </article>
+
+    <article class="card" data-card data-haystack="github pages api catalogue">
+      <h3>What replaced the old site?</h3>
+      <p>
+        The previous c-hydro page was a single catalogue loaded from the GitHub public API.
+        This new site keeps the catalogue idea, but adds curated grouping and workflow references.
+      </p>
+      <div class="actions">
+        <a class="btn" href="https://c-hydro.github.io/">Old catalogue</a>
+        <a class="btn primary" href="workflows.html">Workflow references</a>
+      </div>
+    </article>
+  </div>
+
+  <div class="note">
+    Tip: all pages are plain static HTML/CSS/JS so they work directly on GitHub Pages.
+    To deploy, copy this folder into the <code>c-hydro/c-hydro.github.io</code> repository and enable Pages on the main branch.
+  </div>
+</section>
     </div>
-  </section>
-</main>
+  </main>
 
-<footer>
-  Dati letti dall'
-  <a href="https://api.github.com/orgs/c-hydro/repos" target="_blank" rel="noreferrer">
-    API pubblica di GitHub
-  </a>.
-  Per i repository privati sarebbe necessario un token, ma non può essere usato direttamente
-  in una pagina hostata da GitHub.
-</footer>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <small>
+          Maintained by the <a href="https://github.com/c-hydro">c-hydro</a> GitHub organization — CIMA Research Foundation.
+        </small>
+        <small>
+          License info and contribution guidelines are available in each repository.
+        </small>
+      </div>
+    </div>
+  </footer>
 
-<script>
-  const ORG = "c-hydro";
-  const API_URL = `https://api.github.com/orgs/${ORG}/repos?per_page=100&sort=updated`;
-
-  const statusEl = document.getElementById("status");
-  const repoListEl = document.getElementById("repo-list");
-  const emptyEl = document.getElementById("empty");
-  const searchInput = document.getElementById("search");
-  const sortSelect = document.getElementById("sort");
-
-  let allRepos = [];
-
-  function setStatus(text, isError = false) {
-    if (!statusEl) return;
-    const dot = statusEl.querySelector(".dot");
-    const span = statusEl.querySelector("span");
-
-    if (span) span.textContent = text || "";
-    if (dot) {
-      dot.style.display = text && !isError ? "inline-block" : "none";
-    }
-    statusEl.style.display = text ? "flex" : "none";
-  }
-
-  function summarizeDescription(desc, maxLen = 160) {
-    if (!desc || !desc.trim()) {
-      return "Nessuna descrizione disponibile per questo repository.";
-    }
-    const clean = desc.trim();
-    if (clean.length <= maxLen) return clean;
-
-    const shortened = clean.slice(0, maxLen);
-    const lastSpace = shortened.lastIndexOf(" ");
-    const base = lastSpace > 40 ? shortened.slice(0, lastSpace) : shortened;
-    return base + "…";
-  }
-
-  function formatDate(isoString) {
-    if (!isoString) return "data sconosciuta";
-    const d = new Date(isoString);
-    if (Number.isNaN(d.getTime())) return "data sconosciuta";
-    return d.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "2-digit"
-    });
-  }
-
-  function renderRepos(repos) {
-    repoListEl.innerHTML = "";
-
-    if (!repos.length) {
-      emptyEl.style.display = "block";
-      return;
-    }
-    emptyEl.style.display = "none";
-
-    for (const repo of repos) {
-      const card = document.createElement("article");
-      card.className = "repo-card";
-
-      const header = document.createElement("div");
-      header.className = "repo-header";
-
-      const name = document.createElement("h3");
-      name.className = "repo-name";
-      const link = document.createElement("a");
-      link.href = repo.html_url;
-      link.target = "_blank";
-      link.rel = "noreferrer";
-      link.textContent = repo.name;
-      name.appendChild(link);
-
-      const chip = document.createElement("div");
-      chip.className = "repo-chip";
-      chip.textContent = repo.private ? "Private" : "Public";
-
-      header.appendChild(name);
-      header.appendChild(chip);
-
-      const desc = document.createElement("p");
-      desc.className = "repo-desc";
-      desc.textContent = summarizeDescription(repo.description);
-
-      const meta = document.createElement("div");
-      meta.className = "repo-meta";
-
-      if (repo.language) {
-        const lang = document.createElement("span");
-        lang.className = "badge";
-        lang.innerHTML = `<span class="badge-dot"></span>${repo.language}`;
-        meta.appendChild(lang);
-      }
-
-      if (typeof repo.stargazers_count === "number") {
-        const stars = document.createElement("span");
-        stars.className = "badge";
-        stars.textContent = `⭐ ${repo.stargazers_count} stars`;
-        meta.appendChild(stars);
-      }
-
-      const updated = document.createElement("span");
-      updated.className = "badge";
-      updated.textContent = `Ultimo aggiornamento: ${formatDate(repo.updated_at)}`;
-      meta.appendChild(updated);
-
-      card.appendChild(header);
-      card.appendChild(desc);
-      card.appendChild(meta);
-
-      repoListEl.appendChild(card);
-    }
-  }
-
-  function applyFiltersAndSort() {
-    const term = (searchInput.value || "").toLowerCase().trim();
-    const mode = sortSelect.value;
-
-    let filtered = allRepos.slice();
-
-    if (term) {
-      filtered = filtered.filter(repo => {
-        const haystack = [
-          repo.name,
-          repo.description || "",
-          repo.language || ""
-        ].join(" ").toLowerCase();
-        return haystack.includes(term);
-      });
-    }
-
-    filtered.sort((a, b) => {
-      if (mode === "name") {
-        return a.name.localeCompare(b.name);
-      } else if (mode === "name-desc") {
-        return b.name.localeCompare(a.name);
-      }
-      return new Date(b.updated_at) - new Date(a.updated_at);
-    });
-
-    renderRepos(filtered);
-  }
-
-  async function loadRepos() {
-    try {
-      setStatus("Caricamento dei repository da GitHub…");
-      const resp = await fetch(API_URL);
-
-      if (!resp.ok) {
-        throw new Error(`GitHub API error: ${resp.status}`);
-      }
-
-      const data = await resp.json();
-      allRepos = (data || []).filter(r => !r.archived);
-      setStatus("");
-      applyFiltersAndSort();
-    } catch (err) {
-      console.error(err);
-      setStatus(
-        "Impossibile caricare i repository (limite API o errore di rete).",
-        true
-      );
-    }
-  }
-
-  searchInput.addEventListener("input", applyFiltersAndSort);
-  sortSelect.addEventListener("change", applyFiltersAndSort);
-
-  loadRepos();
-</script>
+  <script src="assets/site.js" defer></script>
 </body>
 </html>

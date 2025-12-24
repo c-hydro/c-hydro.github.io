@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Drought — C‑Hy(drology)Dro(ught)</title>
+  <meta name="description" content="C‑Hy(drology)Dro(ught) — an open-source hub for hydrology, forecasting, and drought tools maintained by CIMA Research Foundation."/>
+  <link rel="icon" href="assets/cima-logo.png" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="brand">
+        <img src="assets/cima-logo.png" alt="CIMA Research Foundation logo" />
+        <div>
+          <h1>C‑Hy(drology)Dro(ught)</h1>
+          <p>Open-source hub for hydrology, forecasting, and drought tools (c-hydro)</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary">
+          <a href="index.html">Home</a>
+          <a href="hydrology.html">Hydrology & Forecasting</a>
+          <a href="drought.html" aria-current="page">Drought</a>
+          <a href="other.html">Other</a>
+          <a href="workflows.html">Workflows</a>
+          <a href="https://github.com/c-hydro">GitHub Org</a>
+          <a href="https://www.cimafoundation.org/en/">CIMA</a>
+      </nav>
+
+      <section class="hero">
+        <h2>Drought</h2>
+        <p>DRYES + DAM + D3Tools and related packages for drought analysis and monitoring.</p>
+      </section>
+    </div>
+  </header>
+
+  <main id="content" class="main">
+    <div class="container">
+      <section>
+  <h2 class="section-title">Drought repositories</h2>
+  <p class="lead">
+    Toolchain for drought analysis & monitoring: indicators, middleware, shared utilities.
+  </p>
+
+  <div class="note">
+    <b>Tags drive classification:</b> only repositories explicitly tagged <code>#hydrology</code> or <code>#drought</code>
+    appear in their respective area pages. All repositories without those tags are listed in <a href="other.html"><b>Other tools</b></a>.
+  </div>
+
+  <label style="display:block; margin: 0 0 12px;">
+    <span style="font-weight:700;">Filter</span><br/>
+    <input data-filter type="search" placeholder="Type to filter (e.g., indices, DAM, DRYES)..."
+      style="width:min(560px,100%); padding:10px 12px; border-radius:12px; border:1px solid var(--border);" />
+  </label>
+
+  <div class="grid">
+    
+        <article class="card" data-card data-haystack="DRYES Python package for drought analysis & monitoring workflows; handles raster maps of meteorological/satellite quantities to compute drought intensity indicators. Drought Indices Python">
+          <h3>DRYES</h3>
+          <p>Python package for drought analysis & monitoring workflows; handles raster maps of meteorological/satellite quantities to compute drought intensity indicators.</p>
+          <div class="badges"><span class="badge">#drought</span><span class="badge">Drought</span><span class="badge">Indices</span><span class="badge">Python</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/dryes">Repository</a></div>
+        </article>
+
+        <article class="card" data-card data-haystack="D3Tools General-purpose tools shared between DOOR, DAM and DRYES. Drought stack Shared utilities Python">
+          <h3>D3Tools</h3>
+          <p>General-purpose tools shared between DOOR, DAM and DRYES.</p>
+          <div class="badges"><span class="badge">#drought</span><span class="badge">Drought stack</span><span class="badge">Shared utilities</span><span class="badge">Python</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/d3tools">Repository</a></div>
+        </article>
+
+        <article class="card" data-card data-haystack="DAM Data Analysis Middleware used in the drought toolchain (designed to work with DRYES and DOOR). Drought stack Middleware Python">
+          <h3>DAM</h3>
+          <p>Data Analysis Middleware used in the drought toolchain (designed to work with DRYES and DOOR).</p>
+          <div class="badges"><span class="badge">#drought</span><span class="badge">Drought stack</span><span class="badge">Middleware</span><span class="badge">Python</span></div>
+          <div class="actions"><a class="btn primary" href="https://github.com/c-hydro/dam">Repository</a></div>
+        </article>
+  </div>
+
+  <div class="note">
+    DRYES is designed to be used in combination with DOOR (Data cOllector and dOwnloadeR) and DAM (Data Analysis Middleware).
+    See the DRYES repository for installation and example workflows.
+  </div>
+</section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <small>
+          Maintained by the <a href="https://github.com/c-hydro">c-hydro</a> GitHub organization — CIMA Research Foundation.
+        </small>
+        <small>
+          License info and contribution guidelines are available in each repository.
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>
