@@ -1,0 +1,89 @@
+name: Validate site catalogue
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate catalogue pages
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          import sys
+          from pathlib import Path
+
+          ROOT = Path(".")
+
+          def read(p: str) -> str:
+            f = ROOT / p
+            if not f.exists():
+              print(f"ERROR: Missing required file: {p}")
+              sys.exit(1)
+            return f.read_text(encoding="utf-8", errors="strict")
+
+          def fail(msg: str):
+            print(f"ERROR: {msg}")
+            sys.exit(1)
+
+          def assert_contains(text: str, needle: str, where: str):
+            if needle not in text:
+              fail(f"{where} must contain: {needle}")
+
+          def count_cards(html: str) -> int:
+            # cards are <article class="card" ... data-card ...>
+            return len(re.findall(r'<article\s+class="card"[^>]*\sdata-card\b', html))
+
+          def validate_page_badge(page: str, required_badge: str):
+            html = read(page)
+            n_cards = count_cards(html)
+            if n_cards == 0:
+              fail(f"{page}: no repository cards found (expected at least 1).")
+
+            # Find each card block and assert it contains the required badge
+            cards = re.findall(r'(<article\s+class="card"[^>]*\sdata-card\b[\s\S]*?</article>)', html)
+            if not cards:
+              fail(f"{page}: could not extract card blocks for validation.")
+            missing = []
+            for i, card in enumerate(cards, start=1):
+              if required_badge not in card:
+                missing.append(i)
+
+            if missing:
+              fail(f"{page}: cards missing badge {required_badge}: {missing}")
+
+            print(f"OK: {page} — {len(cards)} cards contain {required_badge}")
+
+          # --- Validate index rule presence
+          index_html = read("index.html")
+          assert_contains(index_html, "Classification rule:", "index.html")
+          assert_contains(index_html, "#hydrology", "index.html")
+          assert_contains(index_html, "#drought", "index.html")
+          print("OK: index.html contains classification rule text.")
+
+          # --- Validate area badge rules
+          validate_page_badge("hydrology.html", "#hydrology")
+          validate_page_badge("drought.html", "#drought")
+          validate_page_badge("other.html", "#other")
+
+          # --- Validate repository summary includes rule
+          summary_md = read("REPOSITORIES_SUMMARY.md")
+          assert_contains(summary_md, "Classification rule", "REPOSITORIES_SUMMARY.md")
+          assert_contains(summary_md, "#hydrology", "REPOSITORIES_SUMMARY.md")
+          assert_contains(summary_md, "#drought", "REPOSITORIES_SUMMARY.md")
+          print("OK: REPOSITORIES_SUMMARY.md contains classification rule.")
+
+          print("\nAll validations passed.")
+          PY
