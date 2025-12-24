@@ -1,1 +1,61 @@
-/.vscode
+# =========================
+# Operating system files
+# =========================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================
+# Editor / IDE settings
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# =========================
+# Python (used only for CI / local scripts)
+# =========================
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+ENV/
+
+# =========================
+# Node / frontend tooling (if ever added)
+# =========================
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-lock.yaml
+
+# =========================
+# Build / temporary artifacts
+# =========================
+dist/
+build/
+.tmp/
+.cache/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Secrets (never commit)
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# GitHub Pages
+# =========================
+# Do NOT ignore generated site files
+# (HTML/CSS/JS must stay versioned)
+
